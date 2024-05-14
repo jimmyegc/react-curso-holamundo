@@ -1,13 +1,15 @@
 import { Children, ReactNode, useRef, useState } from "react"
 import { Button, Overlay, Popover } from "react-bootstrap"
+import { Placement } from "react-bootstrap/esm/types"
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-
 
 interface OverlayCustomProps {
   children: ReactNode
+  placement?: Placement
+  width: string
 }
 
-export const OverlayCustom = ({ children }: OverlayCustomProps) => {
+export const OverlayCustom = ({ children, placement = "auto", width = "240px" }: OverlayCustomProps) => {
 
   const header = Children.toArray(children).find((child: any) => child.type === Header)
   const content = Children.toArray(children).find((child: any) => child.type === Content)
@@ -56,10 +58,10 @@ export const OverlayCustom = ({ children }: OverlayCustomProps) => {
         show={show}
         onToggle={toggleOverlay}
         rootClose={true}
-        placement="auto"
+        placement={placement}
         overlay={
           <Popover id="popover-contained"
-            style={{ width: '600px', minWidth: '500px' }}
+            style={{ width: `${width}`, minWidth: `${width}` }}
           >
             <Popover.Header>
               <div className="d-flex justify-content-between">
